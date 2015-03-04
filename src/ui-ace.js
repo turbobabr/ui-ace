@@ -139,7 +139,8 @@ angular.module('ui.ace', [])
          * uiAceConfig merged with user options via json in attribute or data binding
          * @type object
          */
-        var opts = angular.extend({}, options, scope.$eval(attrs.uiAce));
+        // var opts = angular.extend({}, options, scope.$eval(attrs.uiAce));
+        var opts = angular.extend({}, options, scope.$eval(attrs.uiAce,scope));
 
         /**
          * ACE editor
