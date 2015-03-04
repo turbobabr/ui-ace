@@ -139,8 +139,15 @@ angular.module('ui.ace', [])
          * uiAceConfig merged with user options via json in attribute or data binding
          * @type object
          */
-        // var opts = angular.extend({}, options, scope.$eval(attrs.uiAce));
-        var opts = angular.extend({}, options, scope.$eval(attrs.uiAce,scope));
+        var opts = angular.extend({}, options, scope.$eval(attrs.uiAce));
+        
+        // Dirty hack that allows to listen to 'onLoad' event if ace editor is placed inside of a directive.
+        setTimeout(function() {
+              opts = angular.extend({}, options, scope.$eval(attrs.uiAce));
+              if (angular.isFunction(opts.onLoad)) {
+                  opts.onLoad(acee);
+              }
+          }, 0);
 
         /**
          * ACE editor
